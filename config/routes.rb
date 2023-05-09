@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
+  # home
+  get("/", { :controller => "movies", :action => "index" })
+  
   # Routes for the Character resource:
-
+ 
   # CREATE
   post("/insert_character", { :controller => "characters", :action => "create" })
           
