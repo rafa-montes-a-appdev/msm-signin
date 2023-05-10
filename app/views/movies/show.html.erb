@@ -18,6 +18,21 @@
       </div>
     </div>
 
+<hr>
+
+ <form action="/insert_bookmark" method="post">
+      
+      <div>   
+        <input type="hidden" id="movie_id_box" name="query_movie_id" value = <%= @the_movie.id %>>
+      </div>
+
+      <button>
+        Create bookmark
+      </button>
+    </form>
+  </div>
+</div>
+
     <dl>
       <dt>
         Title
