@@ -2,8 +2,11 @@ Rails.application.routes.draw do
 
   # Routes for the Bookmark resource:
 
-  # CREATE
+  # CREATE from bookmark index
   post("/insert_bookmark", { :controller => "bookmarks", :action => "create" })
+
+  # CREATE from movie show
+  post("/insert_bookmark_from_movie", { :controller => "bookmarks", :action => "create_from_movie" })
           
   # READ
   get("/bookmarks", { :controller => "bookmarks", :action => "index" })
@@ -14,8 +17,11 @@ Rails.application.routes.draw do
   
   post("/modify_bookmark/:path_id", { :controller => "bookmarks", :action => "update" })
   
-  # DELETE
+  # DELETE from bookmarks
   get("/delete_bookmark/:path_id", { :controller => "bookmarks", :action => "destroy" })
+
+ # DELETE from movies show
+  get("/unbookmark/:path_id", { :controller => "bookmarks", :action => "unbookmark" })
 
   #------------------------------
 

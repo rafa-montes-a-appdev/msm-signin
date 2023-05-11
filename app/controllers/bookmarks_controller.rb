@@ -30,6 +30,19 @@ class BookmarksController < ApplicationController
     end
   end
 
+  def create_from_movie
+    the_bookmark = Bookmark.new
+    the_bookmark.user_id = session.fetch(:user_id)
+    the_bookmark.movie_id = params.fetch("query_movie_id")
+
+    if the_bookmark.valid?
+      the_bookmark.save
+      redirect_to("/movies/#{the_bookmark.movie_id}", { :notice => "Bookmark created successfully." })
+    else
+      redirect_to("/movies/#{the_bookmark.movie_id}", { :alert => the_bookmark.errors.full_messages.to_sentence })
+    end
+  end
+
   def update
     the_id = params.fetch("path_id")
     the_bookmark = Bookmark.where({ :id => the_id }).at(0)
@@ -53,4 +66,16 @@ class BookmarksController < ApplicationController
 
     redirect_to("/bookmarks", { :notice => "Bookmark deleted successfully."} )
   end
+
+  def unbookmark
+    bookmark_id = params.fetch(:path_id)
+    the_bookmark = Bookmark.where({ :id => bookmark_id }).at(0)
+    movie_id = the_bookmark.movie_id
+
+    the_bookmark.destroy
+
+    redirect_to("/movies/#{movie_id}", { :notice => "Bookmark deleted successfully."} )
+  end
+
+
 end
