@@ -1,6 +1,6 @@
 class BookmarksController < ApplicationController
   def index
-    matching_bookmarks = Bookmark.all
+    matching_bookmarks = Bookmark.where( { :user_id => session.fetch(:user_id)})
 
     @list_of_bookmarks = matching_bookmarks.order({ :created_at => :desc })
 
@@ -26,7 +26,7 @@ class BookmarksController < ApplicationController
       the_bookmark.save
       redirect_to("/bookmarks", { :notice => "Bookmark created successfully." })
     else
-      redirect_to("/bookmarks", { :alert => the_bookmark.errors.full_messages.to_sentence })
+      redirect_to("/bookmarks", { :alert => "You already bookmarked this movie!" })
     end
   end
 
