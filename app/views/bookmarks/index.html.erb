@@ -16,7 +16,7 @@
 
     <form action="/insert_bookmark" method="post">
       <select name="query_movie_id"> 
-        <% Movie.all.each do |item| %>
+        <% Movie.all.order(:title).each do |item| %>
           <option value = "<%= item.id %>"> <%= item.title %> </option>
         <% end %>
       </select>
